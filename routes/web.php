@@ -19,8 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/users', [UsersController::class, 'index']);
-Route::get('/users/{id}', [UsersController::class, 'show']);
+Route::get('/users', [UsersController::class, 'index'])->name('users.index')->middleware('auth');
+Route::get('/users/create', [UsersController::class, 'create'])->name('users.create')->middleware('auth');
+Route::post('/users', [UsersController::class, 'store'])->name('users.store')->middleware('auth');;
+Route::get('/users/{id}', [UsersController::class, 'show'])->name('users.show')->middleware('auth');
+Route::delete('/users/{id}', [UsersController::class, 'destroy'])->name('users.destroy')->middleware('auth');;
 
 Auth::routes();
 
