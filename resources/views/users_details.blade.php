@@ -19,12 +19,6 @@
         <div class="title m-b-md">
             List of Users 
         </div>
-        <p>{{ $url_name }}</p>
-
-        @foreach ($users_info as $user_info)
-            @if ($user_info['email'] != 'z@hotmail.com')
-                <div>{{ $loop->index }} - {{ $user_info['name'] }} - {{ $user_info['email'] }} - {{ $user_info['role'] }}</div>
-            @endif
-        @endforeach
+        <p>{{ $id}}</p>
     </div>
 </div>

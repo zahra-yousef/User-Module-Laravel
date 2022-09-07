@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,14 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/users', function () {
-    $users_info = [
-       ['name' => 'zahra', 'email' => 'z@hotmail.com', 'role' => 'admin'],
-       ['name' => 'Ali', 'email' => 'ahotmail.com', 'role' => 'admin'],
-       ['name' => 'Reda', 'email' => 'r@hotmail.com', 'role' => 'user']
-    ];
-    return view('users', ['users_info' => $users_info]);
-});
+Route::get('/users', [UsersController::class, 'index']);
+Route::get('/users/{id}', [UsersController::class, 'show']);
 
 Auth::routes();
 

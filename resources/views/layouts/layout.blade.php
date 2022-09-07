@@ -7,17 +7,18 @@
         <title>Laravel</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <!-- Styles -->
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     </head>
-    <body class="antialiased">
-        @yield('content')
+    <body>
 
-        <footer>
-            Copyright 2022 User Module
-        </footer>
+      @yield('content')
+
+      <footer>
+        <p>Copyright 2022 User Module</p>
+      </footer>
     </body>
 </html>
     
