@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="wrapper create-pizza">
+    <div class="wrapper create-user">
         <h1>Add a New User</h1>
         <form action="/users" method="POST">
             @csrf

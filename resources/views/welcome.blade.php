@@ -6,7 +6,7 @@
         <div class="title m-b-md">
             User Module System
         </div>
-        <a href="/users/create">Add a new user</a>
+        <a href="{{ route('users.create') }}">Add a new user</a>
     </div>
 </div>
 @endsection
