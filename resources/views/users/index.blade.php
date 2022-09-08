@@ -7,7 +7,7 @@
             @if ($user_info['email'] != 'z@hotmail.com')
                 <div class="user-item">
                     <img src="/img/user.png" alt="user icon">
-                    <h4><a href="/users/{{ $user_info->id }}">{{ $user_info['name'] }}</a></h4> 
+                    <h4><a href="{{ route('users.show',$user_info->id) }}">{{ $user_info['name'] }}</a></h4> 
                 </div>
             @endif
         @endforeach

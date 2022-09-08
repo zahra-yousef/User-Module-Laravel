@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -26,22 +27,21 @@ class UsersController extends Controller
         return view('users.create');
     }
 
-    public function store(){
+    public function store(Request $request){
+        $validatedData = $request->validate([
+            'name' => 'required|min:3',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+            'role' => 'required',
+        ]);
+
+        $validatedData['password'] = bcrypt($validatedData['password']);
+
         //create instance of user model
-        $user = new User();
-
-        //request single data from url and assign it to proper table's column 
-        $user->name = request('name');
-        $user->email = request('email');
-        $user->role = request('role');
-        $user->password = md5('test1234');
-
+        $user =  User::create($validatedData);
+        
         //save data into db
         $user->save();
-
-        ini_set("log_errors", 1); // Enable error logging
-        ini_set("error_log", "/tmp/php-error.log"); // set error path
-        error_log($user);
 
         return redirect('/users')->with('msg','New user added successfully!');
     }

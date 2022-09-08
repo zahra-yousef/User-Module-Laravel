@@ -12,5 +12,5 @@
             <button>Delete {{ $user_info->name }} account</button>
         </form>
     </div> 
-    <a href="/users" class="back">Back to all users</a>                  
+    <a href="{{ route('users.index') }}" class="back">Back to all users</a>                  
 @endsection
