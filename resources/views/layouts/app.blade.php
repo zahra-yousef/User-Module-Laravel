@@ -73,6 +73,14 @@
         </nav>
 
         <main class="py-4">
+            @if (Auth::check() && Auth::user()->role === 'admin') 
+                <h1>admin</h1>
+            @elseif (Auth::check() && Auth::user()->role === 'user')
+                <h1>user</h1>
+            @else
+                <h1>guest</h1>
+            @endif
+            
             @yield('content')
         </main>
     </div>

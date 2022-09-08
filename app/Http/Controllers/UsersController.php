@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
     public function index(){
-        //get all users details from db and order them by role
+        // Get all users details from db and order them by role
         $users_info = User::orderBy('role')->get();
 
         return view('users.index', [
@@ -18,7 +18,7 @@ class UsersController extends Controller
     }
 
     public function show($id){
-        //get single user from db
+        // Get single user from db
         $user_info = User::findOrFail($id);
         return view('users.show', ['user_info' => $user_info]);
     }
@@ -28,26 +28,36 @@ class UsersController extends Controller
     }
 
     public function store(Request $request){
-        $validatedData = $request->validate([
+        // Vakidate data
+        $validator = Validator::make($request->all(), [
             'name' => 'required|min:3',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
             'role' => 'required',
         ]);
 
+        // If validation fails go back to pre page 
+        if ($validator->fails()) {
+            return redirect('users/create')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        // Retrieve the validated input...
+        $validatedData = $validator->validated();
         $validatedData['password'] = bcrypt($validatedData['password']);
 
-        //create instance of user model
+        // Create instance of user model
         $user =  User::create($validatedData);
-        
-        //save data into db
+
+        // Save data into db
         $user->save();
 
         return redirect('/users')->with('msg','New user added successfully!');
     }
 
     public function destroy($id){
-        //search for the user
+        // Search for the user
         $user = User::findOrFail($id);
         $user->delete();
 
