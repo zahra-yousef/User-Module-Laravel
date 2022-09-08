@@ -28,7 +28,7 @@ class UsersController extends Controller
     }
 
     public function store(Request $request){
-        // Vakidate data
+        // Validate data
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:3',
             'email' => 'required|email|unique:users',
@@ -62,5 +62,44 @@ class UsersController extends Controller
         $user->delete();
 
         return redirect('/users')->with('msg','User deleted successfully!');
+    }
+
+    public function edit($id)
+    {
+        // Get single user from db
+        $user_info = User::findOrFail($id);
+        return view('users.edit', ['user_info' => $user_info]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        //   // Validate data
+        //   $validator = Validator::make($request->all(), [
+        //     'name' => 'required|min:3',
+        //     'email' => 'required|email|unique:users',
+        //     'password' => 'required|min:6',
+        //     'role' => 'required',
+        // ]);
+
+        // // If validation fails go back to pre page 
+        // if ($validator->fails()) {
+        //     return redirect('users/create')
+        //                 ->withErrors($validator)
+        //                 ->withInput();
+        // }
+
+        // // Retrieve the validated input...
+        // $validatedData = $validator->validated();
+        // $validatedData['password'] = bcrypt($validatedData['password']);
+        
+        $user = User::findOrFail($id);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->role = $request->input('role');
+        $user->password = $request->input('password');
+
+        $user->update();
+        
+        return redirect('/users')->with('msg','Student Updated Successfully!');
     }
 }
