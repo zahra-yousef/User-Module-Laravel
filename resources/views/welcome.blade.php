@@ -6,7 +6,7 @@
         <div class="title m-b-md">
             User Module System
         </div>
-        @if (Auth::check()) 
+        @if (Auth::check() && Auth::user()->role === 'admin') 
             <a href="{{ route('users.index') }}">
                 <button type="button" class="btn btn-warning btn-lg text-white">
                     <i class="fa fa-user" aria-hidden="true"></i> Show Users
