@@ -48,4 +48,5 @@
             <input type="submit" value="Add User">
         </form>
     </div>
+    <a href="{{ route('users.index') }}" class="back"><i class="fa-solid fa-arrow-left"></i> Back to all users</a>                  
 @endsection

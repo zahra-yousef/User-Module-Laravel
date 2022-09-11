@@ -12,9 +12,13 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    {{ __('You are logged in!') }}
-                    <p><a href="/users">View all users info</a></p>
+                    <h4 class="user-info-title">Welcome {{ Auth::user()->name }}</h4>
+                    <p class="type">
+                        <i class="fa fa-envelope" aria-hidden="true"></i> Email: {{ Auth::user()->email }}
+                    </p>
+                    <p class="base">
+                        <i class="fa fa-cog" aria-hidden="true"></i> Role: {{ Auth::user()->role }}
+                    </p>
                 </div>
             </div>
         </div>

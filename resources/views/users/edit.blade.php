@@ -39,8 +39,8 @@
                 id="role" 
                 class="form-control is-valid @error('role') is-invalid @enderror">
                 <option value="">Role</option>
-                <option value="admin">Admin</option>
-                <option value="user">Normal user</option>
+                <option value="admin" {{ ($user_info->role == 'admin') ? 'selected' : '' }} >Admin</option>
+                <option value="user" {{ ($user_info->role == 'user') ? 'selected' : '' }}>Normal user</option>
             </select>
             @error('role')
                 <p class="invalid-feedback">{{ $message }}</p>
@@ -49,4 +49,5 @@
             <input type="submit" value="Update User Info">
         </form>
     </div>
+    <a href="{{ route('users.index') }}" class="back"><i class="fa-solid fa-arrow-left"></i> Back to all users</a>                  
 @endsection

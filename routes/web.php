@@ -24,14 +24,12 @@ Route::prefix('/users')->middleware(['auth', 'isAdmin'])->group(function(){
     Route::get('/create', [UsersController::class, 'create'])->name('users.create');
     Route::delete('/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
     Route::post('/users', [UsersController::class, 'store'])->name('users.store')->middleware('auth');
+    Route::get('/users/edit/{id}', [UsersController::class, 'edit'])->name('users.edit')->middleware('auth');
+    Route::put('/users/update/{id}', [UsersController::class, 'update'])->name('users.update')->middleware('auth');
 });
 
 Route::get('/users', [UsersController::class, 'index'])->name('users.index')->middleware('auth');
 Route::get('/users/{id}', [UsersController::class, 'show'])->name('users.show')->middleware('auth');
-
-
-Route::get('/users/edit/{id}', [UsersController::class, 'edit'])->name('users.edit')->middleware('auth');
-Route::put('/users/update/{id}', [UsersController::class, 'update'])->name('users.update')->middleware('auth');
 
 Auth::routes();
 

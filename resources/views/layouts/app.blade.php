@@ -61,6 +61,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('home') }}" >
+                                        {{ __('User Profile') }}
+                                    </a>
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -79,13 +83,13 @@
         </nav>
 
         <main class="py-4">
-            @if (Auth::check() && Auth::user()->role === 'admin') 
+            {{-- @if (Auth::check() && Auth::user()->role === 'admin') 
                 <h1>admin</h1>
             @elseif (Auth::check() && Auth::user()->role === 'user')
                 <h1>user</h1>
             @else
                 <h1>guest</h1>
-            @endif
+            @endif --}}
             
             @yield('content')
         </main>

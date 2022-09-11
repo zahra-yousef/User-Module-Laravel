@@ -5,12 +5,6 @@
         <p class="type">Name - {{ $user_info->name }}</p>
         <p class="type">Email - {{ $user_info->email }}</p>
         <p class="base">Role - {{ $user_info->role }}</p>
-
-        <form action="{{ route('users.destroy', $user_info->id) }}" method="POST">
-            @csrf
-            @method('DELETE')
-            <button>Delete {{ $user_info->name }} account</button>
-        </form>
     </div> 
     <a href="{{ route('users.index') }}" class="back"><i class="fa-solid fa-arrow-left"></i> Back to all users</a>                  
 @endsection

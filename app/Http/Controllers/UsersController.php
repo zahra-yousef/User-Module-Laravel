@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
@@ -73,33 +74,28 @@ class UsersController extends Controller
 
     public function update(Request $request, $id)
     {
-        //   // Validate data
-        //   $validator = Validator::make($request->all(), [
-        //     'name' => 'required|min:3',
-        //     'email' => 'required|email|unique:users',
-        //     'password' => 'required|min:6',
-        //     'role' => 'required',
-        // ]);
+          // Validate data
+          $validator = Validator::make($request->all(), [
+            'name' => 'required|min:3',
+            'email' => 'required|email',
+            'password' => 'min:6|nullable',
+            'role' => 'required',
+        ]);
 
-        // // If validation fails go back to pre page 
-        // if ($validator->fails()) {
-        //     return redirect('users/create')
-        //                 ->withErrors($validator)
-        //                 ->withInput();
-        // }
+        // If validation fails go back to pre page 
+        if ($validator->fails()) {
+            return redirect('users/users/edit/'.$id)
+                        ->withErrors($validator)
+                        ->withInput();
+        }
 
-        // // Retrieve the validated input...
-        // $validatedData = $validator->validated();
-        // $validatedData['password'] = bcrypt($validatedData['password']);
+        // Retrieve the validated input...
+        $validatedData = $validator->validated();
+        $validatedData['password'] = bcrypt($validatedData['password']);
         
         $user = User::findOrFail($id);
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->role = $request->input('role');
-        $user->password = $request->input('password');
-
-        $user->update();
+        $user->update($validatedData);
         
-        return redirect('/users')->with('msg','Student Updated Successfully!');
+        return redirect('/users')->with('msg','User Updated Successfully!');
     }
 }

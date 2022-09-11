@@ -65,13 +65,18 @@ footer{
   text-transform: uppercase;
   border-bottom: 2px solid;
   padding: 12px 0;
-  color: #5e2195;
+  color: #4B5BE6;
 }
 
 .wrapper{
   max-width: 1140px;
   padding: 10px;
   margin: 20px auto;
+}
+
+/* Home view*/
+h4.user-info-title{
+  margin-bottom: 24px;
 }
 
 /* create user form */
@@ -99,7 +104,7 @@ footer{
   }
 
   input[type=submit]{
-    background: #5e2195;
+    background: #4B5BE6;
     padding: 8px 20px;
     color: #fff;
     border: 0;
@@ -119,7 +124,7 @@ footer{
     font-weight: bold;
   }
   button{
-    background: #5e2195;
+    background: #4B5BE6;
     padding: 8px 20px;
     color: #fff;
     border: 0;
@@ -130,7 +135,7 @@ a.back{
   display: block;
   text-align: center;
   margin-top: 30px;
-  color: #5e2195;
+  color: #4B5BE6;
   margin-bottom: 20px;
 }
 
